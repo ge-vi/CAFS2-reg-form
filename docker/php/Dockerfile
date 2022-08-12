@@ -4,8 +4,7 @@ RUN apk add --update \
 		$PHPIZE_DEPS \
         nano \
 		freetype-dev \
-		git \
 		libjpeg-turbo-dev \
 		libpng-dev \
 	&& docker-php-ext-configure gd --with-jpeg --with-freetype \
-	&& docker-php-ext-install gd \
+	&& docker-php-ext-install gd

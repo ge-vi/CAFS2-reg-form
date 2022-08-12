@@ -1,27 +1,7 @@
 <?php
 
-// var_dump($_FILES);
-
 require_once 'init.php';
-
-
-define('ALLOWED_EXTENSIONS', ['png', 'jpg', 'jpeg']);
-
-// move_uploaded_file($_FILES['some-file-name']['tmp_name'], UPLOAD_DIR . '/' . $_FILES['some-file-name']['name']);
-
-// https://stackoverflow.com/questions/4356289/php-random-string-generator
-function generateRandomString($length = 10)
-{
-    $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    $charactersLength = strlen($characters);
-    $randomString = '';
-
-    for ($i = 0; $i < $length; $i++) {
-        $randomString .= $characters[rand(0, $charactersLength - 1)];
-    }
-
-    return $randomString;
-}
+require_once 'helpers.php';
 
 
 function uploadUserImage(array $user_file): string
@@ -72,8 +52,6 @@ function uploadUserImage(array $user_file): string
 
             return $_SERVER['HTTP_ORIGIN'] . '/file-uploads/' . date('Y/m/d') . '/' . $name . '.' . $ext;
         }
-    } else {
-        return $_SERVER['HTTP_ORIGIN'] . '/file-uploads/default-image.jpg';
     }
 }
 

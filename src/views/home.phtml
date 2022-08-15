@@ -3,7 +3,6 @@
 $missing_data = false;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    require_once './inc/upload.php';
 
 //     var_dump(__LINE__, $_POST);
 //     var_dump(__LINE__, $_FILES);
@@ -16,16 +15,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         !empty($_POST['info']) &&
         !empty($_FILES['user-image']['name'])
     ) {
-        $fname = $_POST['f_name'];
-        $lname = $_POST['l_name'];
-        $city = $_POST['city'];
-        $lang = '';
-        foreach ($_POST['lang'] as $value) {
-            $lang = $lang . ' ' . $value;
-        }
-        $info = $_POST['info'];
 
         $user_image = uploadUserImage($_FILES['user-image']);
+
+        $participant = new ParticipantDTO(
+            $_POST['f_name'],
+            $_POST['l_name'],
+            $_POST['city'],
+            $_POST['lang'],
+            $_POST['info'],
+            $user_image
+        );
+
+        $ps = new PhotoStamp($participant);
+        $participant = $ps->generateProfilePhoto();
+
     } else {
         $missing_data = true;
     }
@@ -171,12 +175,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <?php
             if (
                 $_SERVER['REQUEST_METHOD'] == 'POST' &&
-                !empty($fname) &&
-                !empty($lname) &&
-                !empty($city) &&
-                !empty($lang) &&
-                !empty($info) &&
-                !empty($user_image)
+                isset($participant)
             ): ?>
 
                 <div id="result">
@@ -187,12 +186,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                     <div class="card">
                         <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Vardas: <?= $fname ?></li>
-                            <li class="list-group-item">Pavardė: <?= $lname ?></li>
-                            <li class="list-group-item">Miestas: <?= $city ?></li>
-                            <li class="list-group-item">Programavimo kalba: <?= $lang ?></li>
-                            <li class="list-group-item">Papildoma informacija: <?= $info ?></li>
-                            <li class="list-group-item"><img class="img-fluid" src="<?= $user_image ?>"
+                            <li class="list-group-item">Vardas: <?= $participant->getFName(); ?></li>
+                            <li class="list-group-item">Pavardė: <?= $participant->getLName(); ?></li>
+                            <li class="list-group-item">Miestas: <?= $participant->getCity(); ?></li>
+                            <li class="list-group-item">Programavimo kalba: <?= $participant->getLangs(); ?></li>
+                            <li class="list-group-item">Papildoma informacija: <?= $participant->getInfo(); ?></li>
+                            <li class="list-group-item"><img class="img-fluid" src="<?= $participant->getImage(); ?>"
                                                              alt="user image">
                             </li>
                         </ul>
@@ -211,6 +210,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
         crossorigin="anonymous"></script>
 
-<script src="./js/app.js"></script>
+<!--<script src="./js/app.js"></script>-->
 </body>
 </html>

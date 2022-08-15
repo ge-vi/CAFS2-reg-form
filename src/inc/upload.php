@@ -1,9 +1,5 @@
 <?php
 
-require_once 'init.php';
-require_once 'helpers.php';
-
-
 function uploadUserImage(array $user_file): string
 {
 //    var_dump(__LINE__, $_SERVER);
@@ -37,7 +33,7 @@ function uploadUserImage(array $user_file): string
                 exit;
             }
 
-            $path = UPLOAD_DIR . '/' . date('Y/m/d');
+            $path = UPLOAD_PATH . '/' . date('Y/m/d');
 
             if (!is_dir($path)) {
                 mkdir($path, 0777, true);

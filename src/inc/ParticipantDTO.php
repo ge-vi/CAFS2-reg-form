@@ -1,29 +1,18 @@
 <?php
 
-class Participant
+class ParticipantDTO
 {
-    private string $fName;
-    private string $lName;
-    private string $city;
-    private array $langs;
-    private string $info;
-    private string $image;
-
     public function __construct(
-        string $fName,
-        string $lName,
-        string $city,
-        array  $langs,
-        string $info,
-        string $image
+        protected string $fName,
+        protected string $lName,
+        protected string $city,
+        protected array  $langs,
+        protected string $info,
+        protected string $image
     )
     {
-        $this->fName = $fName;
-        $this->lName = $lName;
-        $this->city = $city;
-        $this->langs = $langs;
-        $this->info = $info;
-        $this->image = $image;
+        // Constructor property promotion
+        // https://stitcher.io/blog/constructor-promotion-in-php-8
     }
 
     /**
@@ -51,11 +40,11 @@ class Participant
     }
 
     /**
-     * @return array
+     * @return string
      */
-    public function getLangs(): array
+    public function getLangs(): string
     {
-        return $this->langs;
+        return implode(' ', $this->langs);
     }
 
     /**
@@ -72,6 +61,15 @@ class Participant
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    /**
+     * @param string $imgPath
+     * @return void
+     */
+    public function setImage(string $imgPath): void
+    {
+        $this->image = $imgPath;
     }
 
 }

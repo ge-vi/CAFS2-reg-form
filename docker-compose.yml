@@ -16,7 +16,13 @@ services:
 
   php:
     container_name: "ca-php-form"
-    build: ./docker/php/
+    build:
+      context: ""
+      dockerfile: ./docker/php/Dockerfile
+      args:
+        USER_ID: '${WWWUSER:-1000}'
+        GROUP_ID: '${WWWGROUP:-1000}'
+        USER: '${USER:-whoami}'
     # `working_dir` - sets the working directory of the container that is created
     working_dir: /var/www
     volumes:

@@ -5,6 +5,21 @@ document.addEventListener('DOMContentLoaded', evt => {
     const form = document.forms.namedItem('user-reg');
     const errorDiv = document.getElementById('error');
 
+    const resultDiv = document.querySelector('#result ');
+
+    function displayParticipantInfo(data) {
+
+        resultDiv.querySelector('#res-fname').textContent = data.f_name;
+        resultDiv.querySelector('#res-lname').textContent = data.l_name;
+        resultDiv.querySelector('#res-city').textContent = data.city;
+        resultDiv.querySelector('#res-langs').textContent = data.lang;
+        resultDiv.querySelector('#res-info').textContent = data.info;
+        resultDiv.querySelector('#res-img').src = data.image;
+
+        resultDiv.classList.remove('d-none');
+        form.reset();
+    }
+
     form.addEventListener('submit', async evt => {
         evt.preventDefault();
         const formData = new FormData(form);
@@ -19,28 +34,12 @@ document.addEventListener('DOMContentLoaded', evt => {
             })
             .then((result) => {
 
+                displayParticipantInfo(result.participant);
 
             })
             .catch((error) => {
-                errorDiv.textContent = error;
+                errorDiv.textContent = 'Klaida, patikrinkite įvestus duomenis';
                 errorDiv.classList.remove('d-none');
             });
     });
 });
-
-/*
-f_name : Vardas
-l_name : Pavardė
-city : vilnius
-lang[] : php
-lang[] : pyt
-info : Papildoma informacija
-user-image : File {
-    lastModified: 1660066506324
-    lastModifiedDate: Tue Aug 09 2022 20:35:06 GMT+0300 (Eastern European Summer Time) {}
-    name: "random.jpg"
-    size: 8853
-    type: "image/jpeg"
-    webkitRelativePath: ""
-}
-*/

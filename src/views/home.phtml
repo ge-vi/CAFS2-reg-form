@@ -15,17 +15,14 @@
 <body>
 
 <div class="container">
-    <div class="row my-5">
-        <div class="col-6">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12 my-5">
 
 
             <h1><a href="/">Registraciija į kursus</a></h1>
 
 
-            <div id="error" class="alert alert-danger d-none" role="alert">
-                <!-- TODO finish when error reporting will be working -->
-                Klaida
-            </div>
+            <div id="error" class="alert alert-danger d-none" role="alert"></div>
 
 
             <div class="card ">
@@ -130,7 +127,7 @@
         </div>
 
 
-        <div class="col-6">
+        <div class="col-lg-6 col-sm-12 my-5">
 
             <div id="result" class="d-none">
 
@@ -140,13 +137,14 @@
 
                 <div class="card">
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Vardas:</li>
-                        <li class="list-group-item">Pavardė:</li>
-                        <li class="list-group-item">Miestas:</li>
-                        <li class="list-group-item">Programavimo kalba:</li>
-                        <li class="list-group-item">Papildoma informacija:</li>
-                        <li class="list-group-item"><img class="img-fluid" src=""
-                                                         alt="user image">
+                        <li id="res-fname" class="list-group-item">Vardas:</li>
+                        <li id="res-lname" class="list-group-item">Pavardė:</li>
+                        <li id="res-city" class="list-group-item">Miestas:</li>
+                        <li id="res-langs" class="list-group-item">Programavimo kalba:</li>
+                        <li id="res-info" class="list-group-item">Papildoma informacija:</li>
+                        <li class="list-group-item">
+                            <img id="res-img" class="img-fluid" src=""
+                                 alt="user image">
                         </li>
                     </ul>
                 </div>

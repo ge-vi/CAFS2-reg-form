@@ -23,6 +23,10 @@ echo '<br>';
 
 
 $ps = new PhotoFrame($participant1);
-$photo = $ps->generateProfilePhoto();
 
-var_dump($photo);
+try {
+    $photo = $ps->generateProfilePhoto();
+    var_dump($photo);
+} catch (Exception $e) {
+    var_dump($e);
+}

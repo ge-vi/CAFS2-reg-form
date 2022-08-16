@@ -9,6 +9,9 @@ class PhotoFrame
         $this->participant = $participant;
     }
 
+    /**
+     * @throws Exception
+     */
     public function generateProfilePhoto(): ParticipantDTO
     {
         $imgPath = $this->participant->getImage();
@@ -36,8 +39,7 @@ class PhotoFrame
             );
 
             if (!$isMerged) {
-                echo 'images not merged';
-                die();
+                throw new Exception('images not merged');
             }
 
             imagejpeg($gdImageWrapper, $imgPath);

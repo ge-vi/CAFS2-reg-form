@@ -1,12 +1,13 @@
-<?php /** @noinspection ALL */
+<?php
 
-define('SRC_DIR', dirname(__FILE__, 2));    // '/var/www'
-define('UPLOAD_PATH', SRC_DIR . '/file-uploads');
+define('WWW_PATH', dirname(__FILE__, 2));    // '/var/www'
+define('UPLOAD_DIR', 'file-uploads');
+define('UPLOAD_PATH', WWW_PATH . '/file-uploads');
 define('ALLOWED_EXTENSIONS', ['png', 'jpg', 'jpeg']);
 
-require_once SRC_DIR . '/inc/helpers.php';
+require_once WWW_PATH . '/inc/helpers.php';
 
-require_once SRC_DIR . '/inc/upload.php';
+require_once WWW_PATH . '/inc/upload.php';
 
-require_once SRC_DIR . '/inc/ParticipantDTO.php';
-require_once SRC_DIR . '/inc/PhotoStamp.php';
+require_once WWW_PATH . '/inc/ParticipantDTO.php';
+require_once WWW_PATH . '/inc/PhotoFrame.php';

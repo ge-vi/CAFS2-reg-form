@@ -1,6 +1,6 @@
 <?php
 
-class PhotoStamp
+class PhotoFrame
 {
     private ParticipantDTO $participant;
 
@@ -12,7 +12,7 @@ class PhotoStamp
     public function generateProfilePhoto(): ParticipantDTO
     {
         $imgPath = $this->participant->getImage();
-        // TODO fix false when file is present
+
         $gdProfileImage = imagecreatefromjpeg($imgPath);
 
         if ($gdProfileImage) {
@@ -40,9 +40,9 @@ class PhotoStamp
                 die();
             }
 
-            imagejpeg($gdImageWrapper, $imgPath . '.jpg');
+            imagejpeg($gdImageWrapper, $imgPath);
 
-            $this->participant->setImage($imgPath . '.jpg');
+            $this->participant->setImageFs($imgPath);
 
             imagedestroy($gdProfileImage);
             imagedestroy($gdImageWrapper);
@@ -50,16 +50,5 @@ class PhotoStamp
             return $this->participant;
         }
         return $this->participant;
-    }
-
-    public static function printGdInfo(): void
-    {
-        $out = '<pre>';
-        foreach (gd_info() as $info => $value) {
-            $out = $out . $info . ':' . $value . PHP_EOL;
-        }
-        $out = $out . '</pre>';
-
-        echo $out;
     }
 }

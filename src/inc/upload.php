@@ -1,7 +1,15 @@
 <?php
 
-function uploadUserImage(array $user_file): string
+/**
+ * @throws Exception
+ */
+function saveFormImage(array $user_file): array
 {
+    $file_paths = [
+        'http_path' => null,
+        'fs_path' => null
+    ];
+
 //    var_dump(__LINE__, $_SERVER);
 //    var_dump(__LINE__, $user_file);
 
@@ -21,33 +29,36 @@ function uploadUserImage(array $user_file): string
     )
     */
 
-    if (isset($user_file['size'])) {
-        $file = $user_file;
+    if ($user_file['error'] === UPLOAD_ERR_OK && isset($user_file['size'])) {
 
-        if ($file['error'] == UPLOAD_ERR_OK) {
-            $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
-            $ext = strtolower($ext);
+        $ext = strtolower(
+            pathinfo($user_file['name'], PATHINFO_EXTENSION)
+        );
 
-            if (!in_array($ext, ALLOWED_EXTENSIONS)) {
-                echo 'File ext not allowed';
-                exit;
-            }
-
-            $path = UPLOAD_PATH . '/' . date('Y/m/d');
-
-            if (!is_dir($path)) {
-                mkdir($path, 0777, true);
-            }
-
-            do {
-                $name = generateRandomString(16);
-                $path = sprintf('%s/%s.%s', $path, $name, $ext);
-            } while (file_exists($path));
-
-            move_uploaded_file($file['tmp_name'], $path);
-
-            return $_SERVER['HTTP_ORIGIN'] . '/file-uploads/' . date('Y/m/d') . '/' . $name . '.' . $ext;
+        if (!in_array($ext, ALLOWED_EXTENSIONS)) {
+            throw new Exception('File ext not allowed');
         }
+
+        $path = UPLOAD_PATH . '/' . date('Y/m/d');
+
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+
+        do {
+            $name = generateRandomString(16);
+            $path = sprintf('%s/%s.%s', $path, $name, $ext);
+        } while (file_exists($path));
+
+        move_uploaded_file($user_file['tmp_name'], $path);
+
+        $file_paths['fs_path'] = $path;
+        $file_paths['http_path'] = sprintf('/%s/%s/%s.%s', UPLOAD_DIR, date('Y/m/d'), $name, $ext);
+
+        return $file_paths;
+
+    } else {
+        throw new Exception($user_file['error']);
     }
 }
 

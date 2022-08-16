@@ -35,7 +35,7 @@
                                 <label for="f-name" class="form-label required">Vardas</label>
                             </div>
                             <div class="col-8">
-                                <input id="f-name" name="f_name" class="form-control" type="text">
+                                <input id="f-name" name="f_name" class="form-control" type="text" required>
                             </div>
                         </div>
 
@@ -44,7 +44,7 @@
                                 <label for="l-name" class="form-label required">Pavardė</label>
                             </div>
                             <div class="col-8">
-                                <input id="l-name" name="l_name" class="form-control" type="text">
+                                <input id="l-name" name="l_name" class="form-control" type="text" required>
                             </div>
                         </div>
 
@@ -53,7 +53,7 @@
                                 <label for="city" class="form-label required">Miestas</label>
                             </div>
                             <div class="col-8">
-                                <select id="city" class="form-select" name="city">
+                                <select id="city" class="form-select" name="city" required>
                                     <!-- empty selection -->
                                     <option disabled selected>pasirinkti miestą</option>
                                     <option value="vilnius">Vilnius</option>
@@ -100,7 +100,7 @@
                             </div>
                             <div class="col-8">
                                 <textarea class="form-control" name="info" rows="4" cols="50" maxlength="50"
-                                          placeholder="pvz.: turiu C++ programavimo patirties"></textarea>
+                                          placeholder="pvz.: turiu C++ programavimo patirties" required></textarea>
                             </div>
                         </div>
 
@@ -109,7 +109,7 @@
                                 <label for="formFile" class="form-label required">Profilio nuotrauka</label>
                             </div>
                             <div class="col-8">
-                                <input class="form-control" type="file" id="formFile" name="user-image">
+                                <input class="form-control" type="file" id="formFile" name="user-image" required>
                             </div>
                         </div>
 

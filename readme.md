@@ -11,6 +11,9 @@ P.S.
 
 Jeigu kažkam atrodys, kad per lengva - grąžinam PDF formatu.
 
+Rekomenduojama naudoti:
+https://spatie.be/docs/browsershot/v2/introduction
+
 P.P.S
 
 Mano sugeneruotas img pridėtas kaip pvz.
